@@ -3,6 +3,8 @@
 // This is the student, starting version of the MathLab02 assignment.
 
 
+import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 
 
@@ -17,7 +19,7 @@ public class MathLab02st
 		int den = Integer.parseInt(strNbr2);
 
 		Rational r = new Rational(num,den);
-		JOptionPane.showMessageDialog(null,r.getNum()+"/"+r.getDen()+" equals "+r.getDecimal());
+		JOptionPane.showMessageDialog(null,r.getOrigional()+r.getRational()+" which equals "+r.getDecimal());
           
 		System.exit(0);
 	}
@@ -25,22 +27,56 @@ public class MathLab02st
 
 				
 
-class Rational
-{
-		
+
+
 //	Rational
-	
+class Rational 
+{
+	private int num, den, onum, oden;
+
+public Rational(int n, int d){
+	onum = num = n;
+	oden = den = d;
+	reduce();
+}
 //	getNum
+	public int getNum ()
+	{
+		return num;
+	}
+	
 	
 //	getDen
-
-//	getDecimal
-
+    public int getDen()
+    {
+    	return den;
+    }
+	
+//getDecimal
+    public double getDecimal()
+    {
+    	return (double)num/den;
+    }
+	
+	
 //	getRational 
+	public String getRational()
+	{
+		return num+"/"+den;
+	}
 	
 //	getOriginal
-
+public String getOrigional()
+{
+	return onum+"/"+oden+" reduces to ";
+}
+	
 //	reduce
+	private void reduce()
+	{
+		num = onum/getGCF(onum, oden);
+		den = oden/getGCF(onum, oden);
+	}
 
 	private int getGCF(int n1,int n2)
 	{
